@@ -87,20 +87,26 @@
             text-align: center;
         }
 
+        /* CHANGED: Profile Image Style */
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             margin: 0 auto 15px;
             background: #00ff88;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 45px;
-            color: #1a1a2e;
-            font-weight: bold;
+            overflow: hidden; /* Ensure image stays circular */
+            border: 4px solid #00ff88;
             animation: float 3s ease-in-out infinite;
             box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         @keyframes float {
@@ -152,49 +158,60 @@
             color: #ddd;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+     /* Container: Handles the 2-column layout on desktop and 1-column on mobile */
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+}
 
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: #00ff88;
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.85em;
-            position: relative;
-            overflow: hidden;
-        }
+/* Base button: Ensures all buttons are the same height and responsive */
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 15px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+}
 
-        .social-link:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
+/* Hover: The "Pop" effect */
+.social-link:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.2);
+}
 
-        .social-link:hover:before {
-            left: 100%;
-        }
+/* Active: Click feedback */
+.social-link:active {
+    transform: translateY(0) scale(0.98);
+}
 
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 0, 110, 0.4);
-        }
+/* Brand Colors - Applied on Hover */
+.social-link.linkedin:hover { background: #0077b5; box-shadow: 0 0 20px rgba(0, 119, 181, 0.4); }
+.social-link.github:hover { background: #333; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+.social-link.leetcode:hover { background: #ffa116; color: #1a1a2e; box-shadow: 0 0 20px rgba(255, 161, 22, 0.4); }
+.social-link.gfg:hover { background: #2f8d46; box-shadow: 0 0 20px rgba(47, 141, 70, 0.4); }
+
+/* Mobile: Stack them in 1 column for small screens */
+@media (max-width: 480px) {
+    .social-links {
+        grid-template-columns: 1fr;
+    }
+}
 
         .section-title {
             font-size: 1.6em;
@@ -268,19 +285,6 @@
             50% { transform: scale(1.2); }
         }
 
-        .about {
-            font-size: 0.9em;
-            line-height: 1.6;
-            color: #ddd;
-            text-align: justify;
-        }
-
-        .highlight {
-            color: #06ffa5;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(6, 255, 165, 0.5);
-        }
-
         .projects-placeholder {
             background: linear-gradient(135deg, rgba(58, 134, 255, 0.3), rgba(255, 0, 110, 0.3));
             padding: 25px;
@@ -289,32 +293,6 @@
             margin: 15px 0;
             position: relative;
             overflow: hidden;
-        }
-
-        .projects-placeholder:hover {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .github-placeholder {
-            background: linear-gradient(135deg, rgba(6, 255, 165, 0.2), rgba(131, 56, 236, 0.2));
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-align: center;
-            border: 2px dashed #06ffa5;
-            color: #06ffa5;
-            font-size: 0.85em;
-            transition: all 0.3s ease;
-        }
-
-        .github-placeholder:hover {
-            background: rgba(6, 255, 165, 0.3);
-            transform: scale(1.05);
         }
 
         .coding-journey {
@@ -388,33 +366,18 @@
         }
 
         @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
-        .neon-border {
-            position: relative;
-        }
+        .neon-border { position: relative; }
 
         .neon-border:after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5);
             border-radius: 25px;
             padding: 2px;
@@ -429,31 +392,11 @@
         }
 
         @media (max-width: 768px) {
-            .personal-info {
-                grid-template-columns: 1fr !important;
-                text-align: center;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .name {
-                font-size: 1.8em;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .click-effect {
-            position: relative;
-            overflow: hidden;
+            .personal-info { grid-template-columns: 1fr !important; text-align: center; }
+            .container { padding: 10px; }
+            .card { padding: 20px; }
+            .name { font-size: 1.8em; }
+            .skills-grid { grid-template-columns: 1fr; }
         }
 
         .ripple {
@@ -466,10 +409,7 @@
         }
 
         @keyframes rippleEffect {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+            to { transform: scale(4); opacity: 0; }
         }
     </style>
 </head>
@@ -478,25 +418,29 @@
     <div class="floating-particles"></div>
 
     <div class="container">
-        <!-- Personal Information Section -->
         <div class="card neon-border click-effect">
             <div class="personal-info">
                 <div class="profile-section">
-                    <div class="profile-img">F</div>
+                    <div class="profile-img">
+                        <img src="profile.jpeg" alt="Fauzan Ali">
+                        </div>
                     <h1 class="name">Mohammed Fauzan Ali</h1>
                     <p class="title">Web Developer & Java Enthusiast</p>
                     
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/fauzanali560" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://leetcode.com/fauzan560" target="_blank" class="social-link">
-                            <i class="fas fa-code"></i> LeetCode
-                        </a>
-                        <div class="github-placeholder">
-                            <i class="fab fa-github"></i> GitHub (Coming Soon)
-                        </div>
-                    </div>
+                   <div class="social-links">
+    <a href="https://www.linkedin.com/in/fauzanali560" target="_blank" class="social-link linkedin">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://github.com/fauzanali560" target="_blank" class="social-link github">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://leetcode.com/fauzan560" target="_blank" class="social-link leetcode">
+        <i class="fas fa-code"></i> LeetCode
+    </a>
+    <a href="https://www.geeksforgeeks.org/user/fauzanali560/" target="_blank" class="social-link gfg">
+        <i class="fas fa-terminal"></i> GFG
+    </a>
+</div>
                 </div>
                 
                 <div class="details-section">
@@ -507,18 +451,17 @@
                     
                     <div class="info-item">
                         <h4><i class="fas fa-user"></i> About</h4>
-                        <p>Passionate CS student with growing expertise in web development and Java programming. Always eager to learn new technologies.</p>
+                        <p>Passionate CS student with growing expertise in web development and Java programming. Currently honing DSA skills to build scalable solutions.</p>
                     </div>
                     
                     <div class="info-item">
                         <h4><i class="fas fa-target"></i> Focus Areas</h4>
-                        <p>Web Development • Java Programming • Data Structures & Algorithms • Problem Solving</p>
+                        <p>Web Development • Java Programming • DSA • Problem Solving</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Skills Section -->
         <div class="card click-effect">
             <h2 class="section-title"><i class="fas fa-rocket"></i> Skills & Technologies</h2>
             <div class="skills-grid">
@@ -564,19 +507,22 @@
             </div>
         </div>
 
-        <!-- Coding Journey Section -->
         <div class="card click-effect">
             <h2 class="section-title"><i class="fas fa-chart-line"></i> Coding Journey</h2>
             <div class="coding-journey">
-                <h3><i class="fas fa-trophy"></i> LeetCode Progress</h3>
-                <p style="font-size: 0.9em; margin: 10px 0;">Sharpening algorithms and problem-solving skills daily</p>
-                <a href="https://leetcode.com/fauzan560" target="_blank" class="interactive-btn">
-                    <i class="fas fa-external-link-alt"></i> View My Solutions
-                </a>
+                <h3><i class="fas fa-trophy"></i> 120+ Problems Solved</h3>
+                <p style="font-size: 0.9em; margin: 10px 0;">Consistently solving problems on LeetCode and GFG to master logic and optimization.</p>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://leetcode.com/fauzan560" target="_blank" class="interactive-btn">
+                        <i class="fas fa-external-link-alt"></i> LeetCode Profile
+                    </a>
+                    <a href="https://www.geeksforgeeks.org/user/fauzanali560/" target="_blank" class="interactive-btn" style="background: linear-gradient(45deg, #2f8d46, #00ff88);">
+                        <i class="fas fa-external-link-alt"></i> GFG Profile
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Projects Section -->
         <div class="card click-effect">
             <h2 class="section-title"><i class="fas fa-laptop-code"></i> Projects</h2>
             <div class="projects-placeholder">
@@ -587,7 +533,7 @@
     </div>
 
     <div class="footer">
-        <p>&copy; 2025 Fauzan Ali | Built with 💜 and cutting-edge web tech</p>
+        <p>&copy; 2026 Fauzan Ali | Built with 💜 and cutting-edge web tech</p>
     </div>
 
     <script>
@@ -600,7 +546,6 @@
             renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejs-bg'), alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            // Create floating geometric shapes
             const geometry = new THREE.SphereGeometry(0.5, 8, 6);
             const materials = [
                 new THREE.MeshBasicMaterial({ color: 0xff006e, transparent: true, opacity: 0.7 }),
@@ -613,101 +558,68 @@
             for (let i = 0; i < 50; i++) {
                 const material = materials[Math.floor(Math.random() * materials.length)];
                 const mesh = new THREE.Mesh(geometry, material);
-                
                 mesh.position.x = (Math.random() - 0.5) * 50;
                 mesh.position.y = (Math.random() - 0.5) * 50;
                 mesh.position.z = (Math.random() - 0.5) * 50;
-                
-                mesh.userData = {
-                    velocity: new THREE.Vector3(
-                        (Math.random() - 0.5) * 0.02,
-                        (Math.random() - 0.5) * 0.02,
-                        (Math.random() - 0.5) * 0.02
-                    )
-                };
-                
+                mesh.userData = { velocity: new THREE.Vector3((Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02) };
                 scene.add(mesh);
                 particles.push(mesh);
             }
-
             camera.position.z = 30;
             animate();
         }
 
         function animate() {
             requestAnimationFrame(animate);
-
             particles.forEach(particle => {
                 particle.rotation.x += 0.01;
                 particle.rotation.y += 0.01;
-                
                 particle.position.add(particle.userData.velocity);
-                
                 if (particle.position.x > 25) particle.position.x = -25;
                 if (particle.position.x < -25) particle.position.x = 25;
                 if (particle.position.y > 25) particle.position.y = -25;
                 if (particle.position.y < -25) particle.position.y = 25;
             });
-
             renderer.render(scene, camera);
         }
 
-        // Mouse interaction with 3D background
         document.addEventListener('mousemove', (event) => {
             const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            
             camera.position.x = mouseX * 5;
             camera.position.y = mouseY * 5;
             camera.lookAt(0, 0, 0);
         });
 
-        // Click ripple effect
         document.addEventListener('click', function(e) {
             const clickableElement = e.target.closest('.click-effect');
             if (clickableElement) {
                 const ripple = document.createElement('span');
                 const rect = clickableElement.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
                 ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
                 ripple.classList.add('ripple');
-                
                 clickableElement.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
+                setTimeout(() => ripple.remove(), 600);
             }
         });
 
-        // Floating particles animation
         function createFloatingParticles() {
             const particlesContainer = document.querySelector('.floating-particles');
-            
             setInterval(() => {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                
                 particlesContainer.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.remove();
-                }, 6000);
+                setTimeout(() => particle.remove(), 6000);
             }, 300);
         }
 
-        // Card entrance animations
         function animateCards() {
             const cards = document.querySelectorAll('.card');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
@@ -718,7 +630,6 @@
                     }
                 });
             });
-
             cards.forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(50px) rotateX(-10deg)';
@@ -727,33 +638,28 @@
             });
         }
 
-        // Typing effect for name
         function typeWriterEffect() {
             const nameElement = document.querySelector('.name');
             const originalText = nameElement.textContent;
             nameElement.textContent = '';
-            
             let i = 0;
             function typeWriter() {
                 if (i < originalText.length) {
                     nameElement.textContent += originalText.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 150);
+                    setTimeout(typeWriter, 120);
                 }
             }
-            
-            setTimeout(typeWriter, 1000);
+            setTimeout(typeWriter, 800);
         }
 
-        // Handle window resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             initThreeJS();
             animateCards();
             typeWriterEffect();
@@ -761,4 +667,4 @@
         });
     </script>
 </body>
-</html>    
+</html>
