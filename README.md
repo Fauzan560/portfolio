@@ -14,12 +14,6 @@ Welcome to my portfolio! I’m a passionate developer focused on building scalab
 * **Solution:** Built an end-to-end ML pipeline with a Streamlit UI to predict risk and visualize retention factors.
 * **Tech:** Python, Scikit-Learn, Streamlit.
 
-### [Airfare Predictive Suite](https://github.com/Fauzan560/airfare-predictive-suite)
-* **Problem:** Volatile flight pricing making travel planning difficult.
-* **Solution:** A Python application utilizing regression models to forecast ticket prices with high accuracy.
-* **Tech:** Python, Tkinter, Scikit-Learn.
-
----
 
 ## 🛠️ My Toolbox
 
