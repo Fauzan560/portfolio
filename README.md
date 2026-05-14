@@ -39,7 +39,7 @@ Welcome to my portfolio! I’m a passionate developer focused on building scalab
 
 ## 📫 Connect with Me
 * **LinkedIn:** [linkedin.com/in/fauzan560](https://linkedin.com/in/YOUR_LINKEDIN)
-* **LeetCode:** [Solved 50+ Problems](https://leetcode.com/YOUR_USER)
-* **Email:** [your.email@example.com]
+* **LeetCode:** [Solved 100+ Problems](https://leetcode.com/YOUR_USER)
+* **Email:** [alifauzi560@gmail.com]
 
 <img width="1387" height="880" alt="image" src="https://github.com/user-attachments/assets/2d7abb28-e3f1-45ed-b46a-d2f323d05c9d" />
